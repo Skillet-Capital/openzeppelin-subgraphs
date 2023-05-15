@@ -1,0 +1,20 @@
+[general]
+query = "<regular expression>"
+
+[store]
+[store.primary]
+connection = "postgresql://graph:${PGPASSWORD}@primary/graph"
+weight = 0
+pool_size = 10
+[store.primary.replicas.repl1]
+connection = "postgresql://graph:${PGPASSWORD}@primary-repl1/graph"
+weight = 1
+[store.primary.replicas.repl2]
+connection = "postgresql://graph:${PGPASSWORD}@primary-repl2/graph"
+weight = 1
+
+[chains]
+ingestor = "block_ingestor_node"
+[chains.mainnet]
+shard = "primary"
+provider = [{ label = "mainnet", url = "http://https://eth-mainnet.g.alchemy.com/v2/_XlzvFN1SJhET7pQS5lxTNlkok7VM2w_", features = [ "archive", "traces" ] }]

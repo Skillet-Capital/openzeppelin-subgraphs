@@ -1,0 +1,10 @@
+{
+  "output": "generated/erc721Balance.",
+  "datasources": [
+    {
+      "module": [
+        "erc721Balance"
+      ]
+    }
+  ]
+}

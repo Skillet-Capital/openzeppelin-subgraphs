@@ -8,7 +8,7 @@ import {
 	Account,
 	ERC721Contract,
 	ERC721Token,
-	ERC721Operator,
+	ERC721Balance,
 } from '../../generated/schema'
 
 import {
@@ -86,16 +86,16 @@ export function fetchERC721Token(contract: ERC721Contract, identifier: BigInt): 
 	return token as ERC721Token
 }
 
-export function fetchERC721Operator(contract: ERC721Contract, owner: Account, operator: Account): ERC721Operator {
-	let id = contract.id.toHex().concat('/').concat(owner.id.toHex()).concat('/').concat(operator.id.toHex())
-	let op = ERC721Operator.load(id)
+export function fetchERC721Balance(contract: ERC721Contract, owner: Bytes): ERC721Balance {
+	let id = contract.id.toHex().concat('/').concat(owner.toHex())
+	let balance = ERC721Balance.load(id);
 
-	if (op == null) {
-		op          = new ERC721Operator(id)
-		op.contract = contract.id
-		op.owner    = owner.id
-		op.operator = operator.id
+	if (balance === null) {
+		balance 					= new ERC721Balance(id);
+		balance.contract	= contract.id;
+		balance.owner			= Address.fromBytes(owner);
+		balance.balance		= BigInt.fromI32(0);
 	}
 
-	return op as ERC721Operator
+	return balance as ERC721Balance;
 }
