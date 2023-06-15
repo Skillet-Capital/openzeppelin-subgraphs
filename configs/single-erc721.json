@@ -1,0 +1,11 @@
+{
+  "output": "generated/single-erc721.",
+  "chain": "mainnet",
+  "datasources": [
+    { 
+      "address": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
+      "startBlock": 12287507,
+      "module": "erc721Balance"
+    }
+  ]
+}

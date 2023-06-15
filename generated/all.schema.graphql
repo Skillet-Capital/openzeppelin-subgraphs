@@ -37,6 +37,7 @@ type Account @entity {
 	ERC721operatorOperator: [ERC721Operator!]! @derivedFrom(field: "operator")
 	ERC721transferFromEvent: [ERC721Transfer!]! @derivedFrom(field: "from")
 	ERC721transferToEvent: [ERC721Transfer!]! @derivedFrom(field: "to")
+	ERC721Balances: [ERC721Balance!]! @derivedFrom(field: "owner")
 	asGovernor: Governor
 	proposed: [Proposal!]! @derivedFrom(field: "proposer")
 	voted: [VoteReceipt!]! @derivedFrom(field: "voter")
@@ -229,6 +230,7 @@ type ERC721Contract @entity(immutable: true) {
 	tokens: [ERC721Token!]! @derivedFrom(field: "contract")
 	operators: [ERC721Operator!]! @derivedFrom(field: "contract")
 	transfers: [ERC721Transfer!]! @derivedFrom(field: "contract")
+	balances: [ERC721Balance!]! @derivedFrom(field: "contract")
 }
 type ERC721Token @entity {
 	id: ID!
@@ -255,6 +257,12 @@ type ERC721Transfer implements Event @entity(immutable: true) {
 	token: ERC721Token!
 	from: Account!
 	to: Account!
+}
+type ERC721Balance @entity {
+	id: ID!
+	owner: Account!
+	contract: ERC721Contract!
+	balance: BigInt!
 }
 type Governor @entity(immutable: true) {
 	id: Bytes!

@@ -1,0 +1,1 @@
+npx graph-cli remove --node http://107.178.212.219:8020/  skillet/erc721-mainnet 
